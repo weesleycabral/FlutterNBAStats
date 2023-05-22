@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "425628579148",
+    "project_id": "flutterlogin-9d953",
+    "storage_bucket": "flutterlogin-9d953.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425628579148:android:88c1cb497069a4b51b0be9",
+        "android_client_info": {
+          "package_name": "com.example.nba_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425628579148-aocu5p4857um9est1fghjcb18mecd8v4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBURoaALAGwc8WkhMBcdvuv02hvanhI1OE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425628579148-aocu5p4857um9est1fghjcb18mecd8v4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
