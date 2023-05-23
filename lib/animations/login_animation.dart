@@ -17,7 +17,7 @@ class _LoginAnimationState extends State<LoginAnimation> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer(const Duration(seconds: 3), () {
+    _timer = Timer(const Duration(seconds: 5), () {
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -36,8 +36,19 @@ class _LoginAnimationState extends State<LoginAnimation> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Lottie.network(
-            'https://assets8.lottiefiles.com/packages/lf20_x62chJ.json'),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Aguarde... Efetuando login',
+              style: TextStyle(fontSize: 30),
+            ),
+            Lottie.asset(
+              'assets/paperplane.json',
+            ),
+          ],
+        ),
       ),
     );
   }

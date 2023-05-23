@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:nba_app/constants.dart';
 import 'package:nba_app/home_page.dart';
 import 'package:nba_app/pages/account/login_page.dart';
 
@@ -20,7 +22,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: kPrimaryColor,
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
       ),
       debugShowCheckedModeBanner: false,
       home: StreamBuilder<User?>(

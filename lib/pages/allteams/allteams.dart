@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
-import 'package:nba_app/models/team.dart';
+import 'package:nba_app/services/api_service.dart';
 
 class AllTeams extends StatefulWidget {
   const AllTeams({super.key});
@@ -12,28 +10,24 @@ class AllTeams extends StatefulWidget {
 }
 
 class _AllTeamsState extends State<AllTeams> {
-  List<Team> teams = [];
-  Future getTeams() async {
-    var response = await http.get(Uri.https('balldontlie.io', 'api/v1/teams'));
-    var jsonData = jsonDecode(response.body);
+  late ApiService apiService;
 
-    for (var eachTeam in jsonData['data']) {
-      final team =
-          Team(abbreviation: eachTeam['abbreviation'], city: eachTeam['city']);
-      teams.add(team);
-    }
+  @override
+  void initState() {
+    super.initState();
+    apiService = ApiService(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: getTeams(),
+        future: apiService.getTeams(),
         builder: (context, snapshot) {
           // se ja terminou de carregar, mostre os dados
           if (snapshot.connectionState == ConnectionState.done) {
             return ListView.builder(
-              itemCount: teams.length,
+              itemCount: apiService.teams.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -43,8 +37,8 @@ class _AllTeamsState extends State<AllTeams> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: ListTile(
-                      title: Text(teams[index].abbreviation),
-                      subtitle: Text(teams[index].city),
+                      title: Text(apiService.teams[index].abbreviation),
+                      subtitle: Text(apiService.teams[index].city),
                     ),
                   ),
                 );

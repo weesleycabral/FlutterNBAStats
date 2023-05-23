@@ -16,6 +16,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   final passwordRepeatController = TextEditingController();
   final usernameController = TextEditingController();
+  bool _passwordVisible = false;
+  bool _passwordVisibleRepeat = false;
 
   @override
   void dispose() {
@@ -101,21 +103,39 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               const SizedBox(height: 16.0),
               TextFormField(
+                obscureText: !_passwordVisible,
                 controller: passwordController,
-                decoration: const InputDecoration(
-                  labelText: 'Senha',
-                  border: OutlineInputBorder(),
-                ),
-                obscureText: true,
+                decoration: InputDecoration(
+                    labelText: 'Senha',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(_passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      },
+                    )),
               ),
               const SizedBox(height: 16.0),
               TextFormField(
+                obscureText: !_passwordVisibleRepeat,
                 controller: passwordRepeatController,
-                decoration: const InputDecoration(
-                  labelText: 'Repita a senha',
-                  border: OutlineInputBorder(),
-                ),
-                obscureText: true,
+                decoration: InputDecoration(
+                    labelText: 'Repita a senha',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(_passwordVisibleRepeat
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          _passwordVisibleRepeat = !_passwordVisibleRepeat;
+                        });
+                      },
+                    )),
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
