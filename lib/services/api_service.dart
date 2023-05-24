@@ -106,8 +106,6 @@ class ApiService {
         Uri.https('balldontlie.io', 'api/v1/games', {'dates[]': currentDate}));
     // print(response.statusCode);
     var jsonData = jsonDecode(response.body);
-    print(jsonData['meta']['total_count']);
-    print(jogosHoje.length);
 
     for (var eachGame in jsonData['data']) {
       final games = Games(
@@ -141,5 +139,40 @@ class ApiService {
           position: eachPlayer['position']);
       players.add(player);
     }
+  }
+
+  Future getSpecificPlayers() async {
+    var response =
+        await http.get(Uri.https('balldontlie.io', '/api/v1/players/237'));
+    var jsonData = jsonDecode(response.body);
+    print(jsonData);
+
+    // for (var eachPlayer in jsonData) {
+    //   final player = Players(
+    //       firstName: eachPlayer['first_name'],
+    //       lastName: eachPlayer['last_name'],
+    //       position: eachPlayer['position']);
+    //   players.add(player);
+    // }
+  }
+
+  Future getStatsSpecificPlayers() async {
+    var teste = Uri.https(
+        'https://www.balldontlie.io/api/v1/season_averages?player_ids[]=115&player_ids[]=237');
+    print(teste);
+    var response = await http.get(Uri.https('balldontlie.io',
+        '/api/v1/players/season_averages', {'player_ids[]': '115'}));
+    var uri = Uri.https('balldontlie.io', 'api/v1/players/season_averages',
+        {'player_ids[]': '237'});
+    print(uri);
+    print(response.body);
+
+    // for (var eachPlayer in jsonData['data']) {
+    //   final player = Players(
+    //       firstName: eachPlayer['first_name'],
+    //       lastName: eachPlayer['last_name'],
+    //       position: eachPlayer['position']);
+    //   players.add(player);
+    // }
   }
 }

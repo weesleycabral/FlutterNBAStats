@@ -10,7 +10,6 @@ import 'pages/account/register_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  FirebaseAuth.instance.signOut();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
