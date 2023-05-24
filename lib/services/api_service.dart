@@ -36,7 +36,6 @@ class ApiService {
         fullName: eachTeam['full_name'],
       );
       teams.add(team);
-      print(team.conference);
     }
   }
 
@@ -55,7 +54,6 @@ class ApiService {
           return a.toString().compareTo(b.toString());
         });
         teamsWest.add(team);
-        print(team.abbreviation);
       }
     }
   }
@@ -75,7 +73,6 @@ class ApiService {
           return a.toString().compareTo(b.toString());
         });
         teamsEast.add(team);
-        print(team.abbreviation);
       }
     }
   }
@@ -106,10 +103,11 @@ class ApiService {
   Future getTodayGames() async {
     String currentDate = getCurrentDate();
     var response = await http.get(
-        Uri.https('balldontlie.io', 'api/v1/games', {'dates[]': '2023-05-23'}));
+        Uri.https('balldontlie.io', 'api/v1/games', {'dates[]': currentDate}));
     // print(response.statusCode);
     var jsonData = jsonDecode(response.body);
-    print(jsonData);
+    print(jsonData['meta']['total_count']);
+    print(jogosHoje.length);
 
     for (var eachGame in jsonData['data']) {
       final games = Games(
@@ -143,6 +141,5 @@ class ApiService {
           position: eachPlayer['position']);
       players.add(player);
     }
-    print(players.length);
   }
 }
