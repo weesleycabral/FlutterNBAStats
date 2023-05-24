@@ -1,5 +1,8 @@
 class Games {
   final int id;
+  final String abbreviation;
+  final String city;
+  final String fullName;
   final String date;
   final int homeTeamScore;
   final int visitorTeamScore;
@@ -22,7 +25,10 @@ class Games {
       required this.time,
       required this.postseason,
       required this.homeTeam,
-      required this.visitorTeam});
+      required this.visitorTeam,
+      required this.abbreviation,
+      required this.city,
+      required this.fullName});
 
   // home_team:{
   //   id

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nba_app/services/api_service.dart';
 
-class AllTeams extends StatefulWidget {
-  const AllTeams({super.key});
+class WestConference extends StatefulWidget {
+  const WestConference({super.key});
 
   @override
-  State<AllTeams> createState() => _AllTeamsState();
+  State<WestConference> createState() => _WestConferenceState();
 }
 
-class _AllTeamsState extends State<AllTeams> {
+class _WestConferenceState extends State<WestConference> {
   late ApiService apiService;
 
   @override
@@ -22,12 +22,13 @@ class _AllTeamsState extends State<AllTeams> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: apiService.getTeams(),
+        future: apiService.getTeamsWest(),
         builder: (context, snapshot) {
           // se ja terminou de carregar, mostre os dados
           if (snapshot.connectionState == ConnectionState.done) {
             return ListView.builder(
-              itemCount: apiService.teams.length,
+              shrinkWrap: true,
+              itemCount: apiService.teamsWest.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -37,16 +38,19 @@ class _AllTeamsState extends State<AllTeams> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: ListTile(
-                      title: Text(apiService.teams[index].abbreviation),
-                      subtitle: Text(apiService.teams[index].city),
+                      leading: SvgPicture.asset(
+                        'assets/nba-logos/${apiService.teamsWest[index].abbreviation}.svg',
+                        width: 50,
+                      ),
+                      title: Text(
+                          '${apiService.teamsWest[index].fullName} -  ${apiService.teamsWest[index].abbreviation}'),
+                      subtitle: Text(apiService.teamsWest[index].city),
                     ),
                   ),
                 );
               },
             );
-          }
-          // senao, mostra um loading circle
-          else {
+          } else {
             return const Center(
               child: CircularProgressIndicator(),
             );

@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nba_app/constants.dart';
 import 'package:nba_app/pages/account/login_page.dart';
-import 'package:nba_app/pages/allteams/allteams.dart';
+import 'package:nba_app/pages/teams/allteams.dart';
 import 'package:nba_app/pages/dashboard/dashboard.dart';
+
+import 'pages/games/games_schedule.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = <Widget>[
     const AllTeams(),
     const DashboardPage(),
+    const GamesSchedule()
   ];
 
   void _onItemTapped(int index) {
@@ -86,9 +89,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kPrimaryColor,
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: kPrimaryColor,
+      // ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -133,8 +136,8 @@ class _HomePageState extends State<HomePage> {
             label: 'Dashboard',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.schedule),
+            label: 'Jogos',
           ),
         ],
       ),
