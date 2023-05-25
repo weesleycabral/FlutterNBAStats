@@ -114,19 +114,56 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Center(child: Text('Pesquise seu jogador favorito')),
-              ElevatedButton(
-                  onPressed: () {
-                    apiService.getStatsSpecificPlayers();
-                  },
-                  child: const Text('Clicas'))
-            ],
-          ),
-        ));
+            padding: const EdgeInsets.all(8.0),
+            child: FutureBuilder(
+              future: apiService.getStatsSpecificPlayers(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return ListView.builder(
+                    itemCount: apiService.playersStats.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: ListTile(
+                            // leading: SvgPicture.asset(
+                            //   'assets/nba-logos/${apiService.teamsEast[index].abbreviation}.svg',
+                            //   width: 50,
+                            // ),
+                            title: Text(apiService.playersStats[index].pts
+                                .toStringAsFixed(1)),
+                            subtitle: Text(apiService.playersStats[index].min),
+                            // trailing: const SizedBox(
+                            //     height: 50, width: 50, child: LikeButton(),
+                            //     ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            )
+            // Column(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   children: [
+            //     const Center(child: Text('Pesquise seu jogador favorito')),
+            //     ElevatedButton(
+            //         onPressed: () {
+            //           apiService.getStatsSpecificPlayers();
+            //         },
+            //         child: const Text('Clicas'))
+            //   ],
+            // ),
+            ));
   }
 }

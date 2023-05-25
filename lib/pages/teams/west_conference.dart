@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:like_button/like_button.dart';
 import 'package:nba_app/services/api_service.dart';
 
 class WestConference extends StatefulWidget {
@@ -45,6 +46,8 @@ class _WestConferenceState extends State<WestConference> {
                       title: Text(
                           '${apiService.teamsWest[index].fullName} -  ${apiService.teamsWest[index].abbreviation}'),
                       subtitle: Text(apiService.teamsWest[index].city),
+                      trailing: const SizedBox(
+                          height: 50, width: 50, child: LikeButton()),
                     ),
                   ),
                 );

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nba_app/constants.dart';
 import 'package:nba_app/home_page.dart';
-import 'package:nba_app/pages/account/login_page.dart';
+import 'package:nba_app/pages/onboarding/onboarding_screen.dart';
 
 import 'pages/account/register_page.dart';
 
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.hasData) {
             return const HomePage();
           } else {
-            return const LoginPage();
+            return const OnboardingScreen();
           }
         },
       ),

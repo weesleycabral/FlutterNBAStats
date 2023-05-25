@@ -43,6 +43,8 @@ dependencies:
   google_fonts: ^4.0.4
   flutter_svg: ^2.0.5
   intl: ^0.17.0
+  smooth_page_indicator: ^1.0.0
+  like_button: ^2.0.5
   
 dev_dependencies:
   flutter_test:
@@ -72,6 +74,7 @@ flutter:
     - assets/welcome.svg
     - assets/nba-logos/
     - assets/relax.json
+    - assets/gameday.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

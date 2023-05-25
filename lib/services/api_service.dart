@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nba_app/models/games.dart';
 import 'package:nba_app/models/players.dart';
+import 'package:nba_app/models/stats.dart';
 import 'package:nba_app/models/team.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,6 +18,9 @@ class ApiService {
   List<Players> players = [];
   List<Games> jogos = [];
   List<Games> jogosHoje = [];
+  List<Stats> playersStats = [];
+  late int year = 2022;
+  late int playerId = 100;
 
   String getCurrentDate() {
     var now = DateTime.now();
@@ -157,22 +161,36 @@ class ApiService {
   }
 
   Future getStatsSpecificPlayers() async {
-    var teste = Uri.https(
-        'https://www.balldontlie.io/api/v1/season_averages?player_ids[]=115&player_ids[]=237');
-    print(teste);
-    var response = await http.get(Uri.https('balldontlie.io',
-        '/api/v1/players/season_averages', {'player_ids[]': '115'}));
-    var uri = Uri.https('balldontlie.io', 'api/v1/players/season_averages',
-        {'player_ids[]': '237'});
-    print(uri);
-    print(response.body);
+    // var response = await http.get(Uri.parse(
+    //     'https://www.balldontlie.io/api/v1/stats?seasons[]=$year&per_game=100&player_ids[]=237'));
+    var response = await http.get(Uri.parse(
+        'https://balldontlie.io/api/v1/season_averages?player_ids[]=237'));
 
-    // for (var eachPlayer in jsonData['data']) {
-    //   final player = Players(
-    //       firstName: eachPlayer['first_name'],
-    //       lastName: eachPlayer['last_name'],
-    //       position: eachPlayer['position']);
-    //   players.add(player);
-    // }
+    var jsonData = jsonDecode(response.body);
+    print(jsonData);
+
+    for (var eachPlayer in jsonData['data']) {
+      final playerStats = Stats(
+        gamesPlayed: eachPlayer['games_played'],
+        playerId: eachPlayer['player_id'],
+        season: eachPlayer['season'],
+        min: eachPlayer['min'],
+        fgm: eachPlayer['fgm'],
+        fga: eachPlayer['fga'],
+        ftm: eachPlayer['ftm'],
+        fta: eachPlayer['fta'],
+        oreb: eachPlayer['oreb'],
+        dreb: eachPlayer['dreb'],
+        reb: eachPlayer['reb'],
+        ast: eachPlayer['ast'],
+        stl: eachPlayer['stl'],
+        blk: eachPlayer['blk'],
+        turnover: eachPlayer['turnover'],
+        pf: eachPlayer['pf'],
+        pts: eachPlayer['pts'],
+        fgPct: eachPlayer['fg_pct'],
+      );
+      playersStats.add(playerStats);
+    }
   }
 }

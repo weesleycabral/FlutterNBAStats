@@ -19,7 +19,7 @@ class Games {
       required this.date,
       required this.homeTeamScore,
       required this.visitorTeamScore,
-      this.season = 2023,
+      required this.season,
       required this.period,
       required this.status,
       required this.time,

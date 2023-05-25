@@ -14,12 +14,37 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  void signUser() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+
+      if (e.code == 'user-not-found') {
+        print('usuario nao encontrado');
+      } else if (e.code == 'wrong-password') {
+        print('senha errada');
+      }
+    }
   }
 
   @override
@@ -77,9 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                         backgroundColor: const Color(0xFF8181E3),
                         shape: const RoundedRectangleBorder()),
                     onPressed: () {
-                      FirebaseAuth.instance.signInWithEmailAndPassword(
-                          email: emailController.text.trim(),
-                          password: passwordController.text.trim());
+                      signUser();
                       Navigator.push(
                           context,
                           MaterialPageRoute(
