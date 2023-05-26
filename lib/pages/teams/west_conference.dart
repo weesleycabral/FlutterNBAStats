@@ -22,6 +22,7 @@ class _WestConferenceState extends State<WestConference> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       body: FutureBuilder(
         future: apiService.getTeamsWest(),
         builder: (context, snapshot) {

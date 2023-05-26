@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nba_app/constants.dart';
 import 'package:nba_app/pages/account/login_page.dart';
+import 'package:nba_app/pages/players_stats/players_stats_page.dart';
 import 'package:nba_app/pages/teams/allteams.dart';
 import 'package:nba_app/pages/dashboard/dashboard.dart';
 
@@ -20,7 +21,8 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = <Widget>[
     const AllTeams(),
     const DashboardPage(),
-    const GamesSchedule()
+    const GamesSchedule(),
+    const PlayersStatsPage()
   ];
 
   void _onItemTapped(int index) {
@@ -128,16 +130,24 @@ class _HomePageState extends State<HomePage> {
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
+            backgroundColor: kPrimaryColor,
             icon: Icon(Icons.badge),
             label: 'Times',
           ),
           BottomNavigationBarItem(
+            backgroundColor: kPrimaryColor,
             icon: Icon(Icons.home),
             label: 'Dashboard',
           ),
           BottomNavigationBarItem(
+            backgroundColor: kPrimaryColor,
             icon: Icon(Icons.schedule),
             label: 'Jogos',
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: kPrimaryColor,
+            icon: Icon(Icons.bar_chart),
+            label: 'Stats',
           ),
         ],
       ),

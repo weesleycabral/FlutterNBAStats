@@ -28,6 +28,12 @@ class ApiService {
     return formatter.format(now);
   }
 
+  String getYesterdayDate() {
+    var ontem = DateTime.now().subtract(const Duration(days: 1));
+    var formatter = DateFormat('yyyy-MM-dd');
+    return formatter.format(ontem);
+  }
+
   Future getTeams() async {
     var response = await http.get(Uri.https('balldontlie.io', 'api/v1/teams'));
     var jsonData = jsonDecode(response.body);
@@ -106,6 +112,7 @@ class ApiService {
 
   Future getTodayGames() async {
     String currentDate = getCurrentDate();
+    String yesterdayDate = getYesterdayDate();
     var response = await http.get(
         Uri.https('balldontlie.io', 'api/v1/games', {'dates[]': currentDate}));
     // print(response.statusCode);
