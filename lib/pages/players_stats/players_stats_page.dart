@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nba_app/pages/app_bar/app_bar.dart';
 import 'package:nba_app/pages/drawer/drawer_widget_page.dart';
+import 'package:nba_app/services/api_service.dart';
 
 class PlayersStatsPage extends StatefulWidget {
   const PlayersStatsPage({super.key});
@@ -10,6 +11,15 @@ class PlayersStatsPage extends StatefulWidget {
 }
 
 class _PlayersStatsPageState extends State<PlayersStatsPage> {
+  late ApiService apiService;
+  final playerController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    apiService = ApiService(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,9 +58,10 @@ class _PlayersStatsPageState extends State<PlayersStatsPage> {
                       child: Icon(Icons.search, color: Colors.grey[600]),
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: playerController,
+                      decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Pesquise por um jogador...'),
                     ),
@@ -58,7 +69,12 @@ class _PlayersStatsPageState extends State<PlayersStatsPage> {
                 ],
               ),
             ),
-          )
+          ),
+          ElevatedButton(
+              onPressed: () {
+                apiService.getSpecificPlayers(playerController.text.trim());
+              },
+              child: const Text('Pesquisar')),
         ],
       ),
     );

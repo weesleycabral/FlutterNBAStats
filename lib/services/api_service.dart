@@ -152,19 +152,23 @@ class ApiService {
     }
   }
 
-  Future getSpecificPlayers() async {
+  Future getSpecificPlayers(String name) async {
     var response =
         await http.get(Uri.https('balldontlie.io', '/api/v1/players/237'));
     var jsonData = jsonDecode(response.body);
     print(jsonData);
 
-    // for (var eachPlayer in jsonData) {
-    //   final player = Players(
-    //       firstName: eachPlayer['first_name'],
-    //       lastName: eachPlayer['last_name'],
-    //       position: eachPlayer['position']);
-    //   players.add(player);
-    // }
+    for (var eachPlayer in jsonData) {
+      final player = Players(
+          firstName: eachPlayer['first_name'],
+          lastName: eachPlayer['last_name'],
+          position: eachPlayer['position']);
+      if (name == player.firstName.trim()) {
+        players.add(player);
+      } else {
+        print('errou o nome ae pae');
+      }
+    }
   }
 
   Future getStatsSpecificPlayers() async {
