@@ -3,7 +3,9 @@ import 'package:nba_app/pages/app_bar/app_bar.dart';
 import 'package:nba_app/pages/drawer/drawer_widget_page.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+  const DashboardPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -14,7 +16,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      appBar: AppBarWidget(title: 'Dashboard'),
+      appBar: const AppBarWidget(title: 'Dashboard'),
       drawer: const DrawerWidget(),
       body: ListView(
         padding: EdgeInsets.zero,
@@ -26,29 +28,29 @@ class _DashboardPageState extends State<DashboardPage> {
                 bottomRight: Radius.circular(50),
               ),
             ),
-            child: Column(
-              children: [
-                const SizedBox(height: 50),
-                ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 30),
-                  title: Text('Hello Wesley!',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall
-                          ?.copyWith(color: Colors.white)),
-                  subtitle: Text('Good Morning',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: Colors.white54)),
-                  // trailing: const CircleAvatar(
-                  //   radius: 30,
-                  //   backgroundImage: AssetImage('assets/images/user.JPG'),
-                  // ),
-                ),
-                const SizedBox(height: 30)
-              ],
-            ),
+            // child: Column(
+            //   children: [
+            //     const SizedBox(height: 50),
+            //     ListTile(
+            //       contentPadding: const EdgeInsets.symmetric(horizontal: 30),
+            //       title: Text('Hello Wesley!',
+            //           style: Theme.of(context)
+            //               .textTheme
+            //               .headlineSmall
+            //               ?.copyWith(color: Colors.white)),
+            //       subtitle: Text('Good Morning',
+            //           style: Theme.of(context)
+            //               .textTheme
+            //               .titleMedium
+            //               ?.copyWith(color: Colors.white54)),
+            //       // trailing: const CircleAvatar(
+            //       //   radius: 30,
+            //       //   backgroundImage: AssetImage('assets/images/user.JPG'),
+            //       // ),
+            //     ),
+            //     const SizedBox(height: 30)
+            //   ],
+            // ),
           ),
           // Container(
           //   color: Theme.of(context).primaryColor,
