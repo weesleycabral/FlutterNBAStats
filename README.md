@@ -1,6 +1,5 @@
-<h1 align="center">Ainda em desenvolvimento...</h1>
-
-
+<h1 align="center">Flutter NBAStats</h1>
+O aplicativo é uma plataforma completa para os fãs de basquete. Logo na primeira tela, os usuários encontram um sistema de login e registro integrado ao Firebase, proporcionando uma experiência segura e personalizada. Através da integração com a API da NBA, os usuários têm acesso aos horários dos jogos em tempo real, informações detalhadas sobre os times de cada conferência e, em breve, poderão obter estatísticas dos jogadores pesquisados.
 
 Algumas prévias:
 <div align="center">
